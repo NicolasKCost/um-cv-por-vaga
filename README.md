@@ -4,6 +4,10 @@
 
 🔗 **Em produção:** [umcvporvaga.pt](https://umcvporvaga.pt)
 
+<p align="center">
+  <img src="docs/screenshots/pagina-inicial.jpg" width="800" alt="Página inicial do Um CV por Vaga" />
+</p>
+
 > O código-fonte é privado, porque se trata de um produto comercial em funcionamento. Este repositório apresenta o projeto, as funcionalidades e as decisões técnicas.
 
 ---
@@ -30,6 +34,11 @@ O utilizador carrega o seu CV uma vez. Depois, para cada vaga, cola o anúncio e
 - **Pagamentos com Stripe** (cartão, MB WAY, Apple Pay e Google Pay) e sistema de créditos.
 - **Painel de administração** com utilizadores, estatísticas de visitas e controlo do custo da IA por pedido.
 - **E-mails de ajuda automáticos** para quem se regista mas não chega a usar a plataforma.
+
+<p align="center">
+  <img src="docs/screenshots/colar-vaga.jpg" width="420" alt="Colar a vaga" />
+  <img src="docs/screenshots/resultado.jpg" width="420" alt="Resultado: CV adaptado com compatibilidade" />
+</p>
 
 ## 🛠️ Stack técnica
 
