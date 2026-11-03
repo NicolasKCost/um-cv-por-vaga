@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/svg/hero.svg" width="100%" alt="Um CV por Vaga — o CV é lido, a vaga analisada e o CV reescrito sem inventar dados, depois a candidatura é enviada" />
+</p>
+
 # 📄 Um CV por Vaga
 
 **Plataforma SaaS que adapta o CV de cada candidato a uma vaga específica com IA, sem inventar dados, e envia a candidatura.**
@@ -53,7 +57,15 @@ O utilizador carrega o seu CV uma vez. Depois, para cada vaga, cola o anúncio e
 | Pagamentos | Stripe (Checkout e webhooks) |
 | Servidor | Linux (Hostinger), publicação via SSH |
 
+<p align="center">
+  <img src="docs/svg/arquitetura.svg" width="100%" alt="Arquitetura: o utilizador fala com o backend PHP, que liga à Gemini API, ao MySQL, ao Gmail/Brevo e ao Stripe" />
+</p>
+
 ## 🧪 Como é testado e publicado
+
+<p align="center">
+  <img src="docs/svg/deploy.svg" width="100%" alt="Pipeline de publicação: testes, backup, sincronização com migrações e verificação HTTP" />
+</p>
 
 Cada atualização passa por um script de publicação que:
 

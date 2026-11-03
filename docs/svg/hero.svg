@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
+  <style>
+    text { font-family: Consolas, 'SFMono-Regular', 'DejaVu Sans Mono', 'Liberation Mono', 'Courier New', monospace; }
+    .blink { animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .pulse { animation: pulse 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.75); } }
+    @keyframes tp { 0%,2.143% { clip-path: inset(0 100% 0 0); } 11.000%,97.143% { clip-path: inset(0 0 0 0); opacity: 1; } 100% { opacity: 0; } } @keyframes s0 { 0%,14.286% { opacity: 0; } 15.357%,95.714% { opacity: 1; } 97.857%,100% { opacity: 0; } } @keyframes s1 { 0%,22.143% { opacity: 0; } 23.214%,95.714% { opacity: 1; } 97.857%,100% { opacity: 0; } } @keyframes s2 { 0%,30.000% { opacity: 0; } 31.071%,95.714% { opacity: 1; } 97.857%,100% { opacity: 0; } } @keyframes s3 { 0%,37.857% { opacity: 0; } 38.929%,95.714% { opacity: 1; } 97.857%,100% { opacity: 0; } } @keyframes s4 { 0%,45.714% { opacity: 0; } 46.786%,95.714% { opacity: 1; } 97.857%,100% { opacity: 0; } } .beam { animation: beam 2.2s ease-in-out infinite; } @keyframes beam { 0% { transform: translateY(0); opacity: 0; } 15%,85% { opacity: .9; } 100% { transform: translateY(96px); opacity: 0; } } .flow { stroke-dasharray: 4 6; animation: flow 1s linear infinite; } @keyframes flow { to { stroke-dashoffset: -20; } } @keyframes ok { 0%,54.286% { opacity: 0; } 55.357%,95.714% { opacity: 1; } 97.857%,100% { opacity: 0; } }
+  </style>
+  <rect x="1" y="1" width="898" height="298" rx="10" fill="#0a0e14" stroke="#1f3b2d" stroke-width="2"/>
+  <path d="M1 11 a10 10 0 0 1 10 -10 H889 a10 10 0 0 1 10 10 V34 H1 Z" fill="#161b22"/>
+  <line x1="1" y1="34" x2="899" y2="34" stroke="#1f3b2d"/>
+  <circle cx="20" cy="17.5" r="6" fill="#ff5f56"/><circle cx="40" cy="17.5" r="6" fill="#ffbd2e"/><circle cx="60" cy="17.5" r="6" fill="#27c93f"/>
+  <text x="450.0" y="22" text-anchor="middle" font-size="13" fill="#7d8590">umcvporvaga.pt — em produção</text>
+  <text x="30" y="78" font-size="30" font-weight="bold" fill="#e6edf3">Um CV por Vaga</text>
+  <circle class="pulse" cx="300" cy="68" r="5" fill="#00ff9c"/><text x="312" y="73" font-size="13" fill="#00ff9c">online</text>
+  <text x="30" y="102" font-size="13.5" fill="#7d8590">SaaS que adapta o CV a cada vaga com IA e envia a candidatura</text>
+  <text x="30" y="128" font-size="14"><tspan fill="#00ff9c">$</tspan></text>
+  <text x="46" y="128" font-size="14" fill="#e6edf3" textLength="279.0" lengthAdjust="spacingAndGlyphs" style="clip-path: inset(0 100% 0 0); animation: tp 14.0s infinite steps(31)">./adaptar-cv --vaga anuncio.txt</text>
+  <text x="30" y="150" font-size="14" style="opacity:0;animation:s0 14.0s infinite" xml:space="preserve"><tspan fill="#00ff9c">✓</tspan> <tspan fill="#e6edf3">CV lido</tspan>  <tspan fill="#7d8590">— experiência, formação e competências</tspan></text><text x="30" y="174" font-size="14" style="opacity:0;animation:s1 14.0s infinite" xml:space="preserve"><tspan fill="#00ff9c">✓</tspan> <tspan fill="#e6edf3">vaga analisada</tspan>  <tspan fill="#7d8590">— requisitos e palavras-chave</tspan></text><text x="30" y="198" font-size="14" style="opacity:0;animation:s2 14.0s infinite" xml:space="preserve"><tspan fill="#00ff9c">✓</tspan> <tspan fill="#e6edf3">compatibilidade calculada</tspan>  <tspan fill="#7d8590">— o que encaixa e o que falta</tspan></text><text x="30" y="222" font-size="14" style="opacity:0;animation:s3 14.0s infinite" xml:space="preserve"><tspan fill="#00ff9c">✓</tspan> <tspan fill="#e6edf3">CV reescrito</tspan>  <tspan fill="#7d8590">— só com dados reais do candidato</tspan></text><text x="30" y="246" font-size="14" style="opacity:0;animation:s4 14.0s infinite" xml:space="preserve"><tspan fill="#00ff9c">✓</tspan> <tspan fill="#e6edf3">candidatura enviada</tspan>  <tspan fill="#7d8590">— pelo Gmail do próprio utilizador</tspan></text>
+  <line x1="584" y1="50" x2="584" y2="280" stroke="#1f3b2d"/>
+  <rect x="610" y="60" width="110" height="130" rx="6" fill="#0f1720" stroke="#56d4ff" stroke-width="1.5"/><text x="620" y="80" font-size="12" fill="#56d4ff">vaga</text><rect x="620" y="94" width="80" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="620" y="108" width="60" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="620" y="122" width="86" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="620" y="136" width="50" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="620" y="150" width="70" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="620" y="164" width="40" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="760" y="60" width="110" height="130" rx="6" fill="#0f1720" stroke="#e3b341" stroke-width="1.5"/><text x="770" y="80" font-size="12" fill="#e3b341">CV</text><rect x="770" y="94" width="70" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="770" y="108" width="88" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="770" y="122" width="54" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="770" y="136" width="80" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="770" y="150" width="62" height="6" rx="2" fill="#7d8590" opacity=".5"/><rect x="770" y="164" width="76" height="6" rx="2" fill="#7d8590" opacity=".5"/>
+  <g clip-path="url(#dc)"><rect class="beam" x="610" y="88" width="260" height="3" fill="#00ff9c"/></g>
+  <defs><clipPath id="dc"><rect x="610" y="60" width="260" height="130"/></clipPath></defs>
+  <path class="flow" d="M665 192 V205 H770 V213 M815 192 V205 H770" fill="none" stroke="#1f8a5b" stroke-width="2"/>
+  <g style="opacity:0;animation:ok 14.0s infinite">
+    <rect x="670" y="215" width="200" height="54" rx="6" fill="#0f2a1e" stroke="#00ff9c" stroke-width="1.5"/>
+    <text x="770" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="#00ff9c">CV adaptado à vaga</text>
+    <text x="770" y="257" text-anchor="middle" font-size="11.5" fill="#7d8590">sem inventar dados</text></g>
+</svg>
