@@ -49,62 +49,82 @@ def janela(t0, t1, T, nome):
     return f"@keyframes {nome} {{ 0%,{pc(t0)} {{ opacity: 0; }} {pc(t0+0.15)},{pc(t1)} {{ opacity: 1; }} {pc(t1+0.3)},100% {{ opacity: 0; }} }}"
 
 
-# ---------------------------------------------------------------- cabeçalho
+# ---------------------------------------------------------------- cabeçalho (visual azul do site)
+SANS = "-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+AZUL, AZUL_E, AZUL_L, TINTA, MUT, LINHA, FUNDO = "#1d4ed8", "#1e3a8a", "#eff6ff", "#111827", "#6b7280", "#e5e7eb", "#f6f7fb"
+OK, OK_L, AVISO, AVISO_L = "#047857", "#ecfdf5", "#b45309", "#fffbeb"
+
+
 def hero():
-    W, H, T = 900, 300, 14.0
+    W, H, T = 900, 320, 12.0
     pc = lambda s: f"{100 * s / T:.3f}%"
-    css = []
-    cmd = "./adaptar-cv --vaga anuncio.txt"
-    cw = 9.0
-    n = len(cmd)
-    css.append(f"@keyframes tp {{ 0%,{pc(0.3)} {{ clip-path: inset(0 100% 0 0); }} {pc(0.3+n*0.04)},{pc(T-0.4)} {{ clip-path: inset(0 0 0 0); opacity: 1; }} 100% {{ opacity: 0; }} }}")
-    passos = [
-        ("CV lido", "experiência, formação e competências"),
-        ("vaga analisada", "requisitos e palavras-chave"),
-        ("compatibilidade calculada", "o que encaixa e o que falta"),
-        ("CV reescrito", "só com dados reais do candidato"),
-        ("candidatura enviada", "pelo Gmail do próprio utilizador"),
-    ]
-    linhas = []
-    for i, (a, b) in enumerate(passos):
-        t = 2.0 + i * 1.1
-        css.append(janela(t, T - 0.6, T, f"s{i}"))
-        linhas.append(f'<text x="30" y="{150 + i*24}" font-size="14" style="opacity:0;animation:s{i} {T}s infinite" xml:space="preserve">'
-                      f'<tspan fill="{GREEN}">✓</tspan> <tspan fill="{WHITE}">{e(a)}</tspan>  <tspan fill="{GREY}">— {e(b)}</tspan></text>')
-    # documentos à direita: vaga + CV -> CV adaptado
-    dx = 610
-    css.append(f".beam {{ animation: beam 2.2s ease-in-out infinite; }} @keyframes beam {{ 0% {{ transform: translateY(0); opacity: 0; }} 15%,85% {{ opacity: .9; }} 100% {{ transform: translateY(96px); opacity: 0; }} }}")
-    css.append(".flow { stroke-dasharray: 4 6; animation: flow 1s linear infinite; } @keyframes flow { to { stroke-dashoffset: -20; } }")
-    css.append(janela(7.6, T - 0.6, T, "ok"))
+    css = [f"text {{ font-family: {SANS}; }}",
+           ".pulse { animation: pulse 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }",
+           "@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }"]
 
-    def doc(x, y, titulo, cor, linhas_doc):
-        r = [f'<rect x="{x}" y="{y}" width="110" height="130" rx="6" fill="#0f1720" stroke="{cor}" stroke-width="1.5"/>',
-             f'<text x="{x+10}" y="{y+20}" font-size="12" fill="{cor}">{e(titulo)}</text>']
-        for k, w in enumerate(linhas_doc):
-            r.append(f'<rect x="{x+10}" y="{y+34 + k*14}" width="{w}" height="6" rx="2" fill="{GREY}" opacity=".5"/>')
-        return "".join(r)
+    def aparece(nome, t, dy=6):
+        css.append(f"@keyframes {nome} {{ 0%,{pc(t)} {{ opacity: 0; transform: translateY({dy}px); }} {pc(t+0.4)},{pc(T-0.6)} {{ opacity: 1; transform: none; }} {pc(T-0.2)},100% {{ opacity: 0; }} }}")
+        return f"opacity:0; animation: {nome} {T}s infinite"
 
-    docs = (doc(dx, 60, "vaga", CYAN, [80, 60, 86, 50, 70, 40]) +
-            doc(dx + 150, 60, "CV", YELLOW, [70, 88, 54, 80, 62, 76]))
-    adapt = f"""<g style="opacity:0;animation:ok {T}s infinite">
-    <rect x="{dx+60}" y="215" width="200" height="54" rx="6" fill="#0f2a1e" stroke="{GREEN}" stroke-width="1.5"/>
-    <text x="{dx+160}" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="{GREEN}">CV adaptado à vaga</text>
-    <text x="{dx+160}" y="257" text-anchor="middle" font-size="11.5" fill="{GREY}">sem inventar dados</text></g>"""
+    # cartão da direita: anúncio -> análise -> CV adaptado
+    cx, cy, cw = 500, 34, 370
+    css.append(f"@keyframes barra {{ 0%,{pc(2.2)} {{ transform: scaleX(0); }} {pc(3.8)},{pc(T-0.6)} {{ transform: scaleX(.82); }} {pc(T-0.2)},100% {{ transform: scaleX(0); }} }}")
+    css.append(f"@keyframes cont {{ 0%,{pc(2.2)} {{ opacity: 0; }} {pc(2.4)},{pc(T-0.6)} {{ opacity: 1; }} {pc(T-0.2)},100% {{ opacity: 0; }} }}")
+    num = []
+    for k, v in enumerate(range(0, 83, 6)):
+        a = 2.2 + k * 0.11
+        b = a + 0.11
+        nm = f"n{k}"
+        css.append(f"@keyframes {nm} {{ 0%,{pc(a)} {{ opacity: 0; }} {pc(a+0.01)},{pc(b)} {{ opacity: 1; }} {pc(b+0.01)},100% {{ opacity: 0; }} }}")
+        num.append(f'<text x="{cx+cw-20}" y="{cy+128}" text-anchor="end" font-size="15" font-weight="700" fill="{OK}" style="opacity:0;animation:{nm} {T}s infinite">{v}%</text>')
+    fim_n = 2.2 + len(num) * 0.11
+    num.append(f'<text x="{cx+cw-20}" y="{cy+128}" text-anchor="end" font-size="15" font-weight="700" fill="{OK}" style="{aparece("nf", fim_n, 0)}">82%</text>')
+
+    def chip(x, y, txt, cor, fundo, nome, t):
+        w = len(txt) * 6.9 + 18
+        return (f'<g style="{aparece(nome, t)}"><rect x="{x}" y="{y}" width="{w}" height="24" rx="12" fill="{fundo}"/>'
+                f'<text x="{x+9}" y="{y+16}" font-size="12" font-weight="600" fill="{cor}">{e(txt)}</text></g>', w)
+
+    chips, x = [], cx + 20
+    for i, (txt, cor, fundo) in enumerate([("✓ atendimento", OK, OK_L), ("✓ reservas", OK, OK_L), ("falta: inglês", AVISO, AVISO_L)]):
+        svg_chip, w = chip(x, cy + 146, txt, cor, fundo, f"ch{i}", 4.0 + i * 0.35)
+        chips.append(svg_chip)
+        x += w + 8
+    card = f"""
+  <rect x="{cx}" y="{cy}" width="{cw}" height="{H-68}" rx="14" fill="#ffffff" stroke="{LINHA}"/>
+  <rect x="{cx+20}" y="{cy+18}" width="132" height="22" rx="11" fill="{FUNDO}"/>
+  <text x="{cx+30}" y="{cy+33}" font-size="11" font-weight="700" fill="{MUT}" letter-spacing=".5">EXEMPLO DE ANÚNCIO</text>
+  <text x="{cx+cw-20}" y="{cy+33}" text-anchor="end" font-size="12" fill="{MUT}">Hotel · Cascais</text>
+  <text x="{cx+20}" y="{cy+66}" font-size="17" font-weight="700" fill="{TINTA}">Rececionista de Hotel</text>
+  <rect x="{cx+20}" y="{cy+80}" width="300" height="7" rx="3" fill="{LINHA}"/><rect x="{cx+20}" y="{cy+94}" width="250" height="7" rx="3" fill="{LINHA}"/>
+  <g style="opacity:0;animation:cont {T}s infinite">
+    <text x="{cx+20}" y="{cy+128}" font-size="13" font-weight="600" fill="{TINTA}">Compatibilidade do teu CV</text>
+  </g>
+  {"".join(num)}
+  <rect x="{cx+20}" y="{cy+136}" width="{cw-40}" height="0" fill="none"/>
+  {"".join(chips)}
+  <rect x="{cx+20}" y="{cy+182}" width="{cw-40}" height="8" rx="4" fill="{LINHA}"/>
+  <rect x="{cx+20}" y="{cy+182}" width="{cw-40}" height="8" rx="4" fill="{OK}" style="transform-box: fill-box; transform-origin: left; animation: barra {T}s infinite"/>
+  <g style="{aparece("bt", 6.0)}">
+    <rect x="{cx+20}" y="{cy+204}" width="{cw-40}" height="40" rx="10" fill="{AZUL}"/>
+    <text x="{cx+cw/2}" y="{cy+229}" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">✓ CV adaptado — sem inventar dados</text>
+  </g>"""
+    passos = ["Cola o anúncio da vaga", "Vê o que encaixa e o que falta", "Recebe o CV reescrito para a vaga", "Envia pelo teu Gmail"]
+    lista = "".join(
+        f'<g style="{aparece(f"p{i}", 0.6 + i*0.5)}"><circle cx="44" cy="{178 + i*27}" r="10" fill="{AZUL_L}"/>'
+        f'<text x="44" y="{182 + i*27}" text-anchor="middle" font-size="11" font-weight="700" fill="{AZUL}">{i+1}</text>'
+        f'<text x="64" y="{183 + i*27}" font-size="14" fill="{TINTA}">{e(t)}</text></g>' for i, t in enumerate(passos))
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">
-  {style(" ".join(css))}
-  {window(W, H, "umcvporvaga.pt — em produção")}
-  <text x="30" y="78" font-size="30" font-weight="bold" fill="{WHITE}">Um CV por Vaga</text>
-  <circle class="pulse" cx="300" cy="68" r="5" fill="{GREEN}"/><text x="312" y="73" font-size="13" fill="{GREEN}">online</text>
-  <text x="30" y="102" font-size="13.5" fill="{GREY}">SaaS que adapta o CV a cada vaga com IA e envia a candidatura</text>
-  <text x="30" y="128" font-size="14"><tspan fill="{GREEN}">$</tspan></text>
-  <text x="46" y="128" font-size="14" fill="{WHITE}" textLength="{n*cw}" lengthAdjust="spacingAndGlyphs" style="clip-path: inset(0 100% 0 0); animation: tp {T}s infinite steps({n})">{e(cmd)}</text>
-  {"".join(linhas)}
-  <line x1="{dx-26}" y1="50" x2="{dx-26}" y2="{H-20}" stroke="{BORDER}"/>
-  {docs}
-  <g clip-path="url(#dc)"><rect class="beam" x="{dx}" y="88" width="260" height="3" fill="{GREEN}"/></g>
-  <defs><clipPath id="dc"><rect x="{dx}" y="60" width="260" height="130"/></clipPath></defs>
-  <path class="flow" d="M{dx+55} 192 V205 H{dx+160} V213 M{dx+205} 192 V205 H{dx+160}" fill="none" stroke="{GREEN_DIM}" stroke-width="2"/>
-  {adapt}
+  <style>{" ".join(css)}</style>
+  <rect x="1" y="1" width="{W-2}" height="{H-2}" rx="16" fill="{FUNDO}" stroke="{LINHA}" stroke-width="2"/>
+  <rect x="34" y="36" width="24" height="30" rx="5" fill="{AZUL}"/><rect x="40" y="44" width="12" height="3" rx="1.5" fill="#ffffff"/><rect x="40" y="51" width="12" height="3" rx="1.5" fill="#ffffff"/><rect x="40" y="58" width="8" height="3" rx="1.5" fill="#ffffff"/>
+  <text x="66" y="58" font-size="20" font-weight="800" fill="{TINTA}">um<tspan fill="{AZUL}">cv</tspan>porvaga</text>
+  <circle class="pulse" cx="232" cy="51" r="4.5" fill="#16a34a"/><text x="242" y="55" font-size="12.5" fill="{OK}" font-weight="600">online</text>
+  <text x="34" y="110" font-size="27" font-weight="800" fill="{TINTA}">O teu CV adaptado a</text>
+  <text x="34" y="143" font-size="27" font-weight="800" fill="{AZUL}">cada vaga, em 1 minuto.</text>
+  {lista}
+  <text x="34" y="{H-22}" font-size="12.5" fill="{MUT}">umcvporvaga.pt · PHP · JavaScript · MySQL · Gemini · Stripe</text>
+  {card}
 </svg>"""
     write("hero.svg", svg)
 
